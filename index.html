@@ -55,6 +55,14 @@
         .spec-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; color: var(--muted); font-size: 0.95rem; }
         .spec-list strong { color: var(--text); }
         .price { margin-top: auto; font-size: 1.35rem; font-weight: 800; color: var(--accent); }
+        .price-compare { margin-top: 10px; padding: 12px; border-radius: 14px; border: 1px solid rgba(109, 224, 211, 0.25); background: linear-gradient(180deg, rgba(109, 224, 211, 0.08), rgba(109, 224, 211, 0.03)); display: grid; gap: 8px; }
+        .price-compare-title { margin: 0; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.08em; color: #93fff2; font-weight: 700; }
+        .compare-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--muted); font-size: 0.92rem; }
+        .compare-row strong { color: var(--text); font-size: 0.98rem; }
+        .compare-savings { justify-self: start; padding: 5px 10px; border-radius: 999px; background: rgba(255, 191, 77, 0.16); color: #ffdca2; border: 1px solid rgba(255, 191, 77, 0.28); font-size: 0.8rem; font-weight: 700; }
+        .card-actions { display: grid; gap: 8px; }
+        .button.amazon { border-color: rgba(255, 191, 77, 0.45); background: rgba(255, 191, 77, 0.1); }
+        .button.noon { border-color: rgba(109, 224, 211, 0.45); background: rgba(109, 224, 211, 0.12); }
         .card-actions .button { width: 100%; }
         .disclosure { margin-top: 24px; padding: 18px 20px; border-radius: 18px; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.08); color: var(--muted); line-height: 1.7; }
         footer { max-width: 1200px; margin: 0 auto; padding: 0 20px 32px; color: var(--muted); font-size: 0.95rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
@@ -157,6 +165,11 @@
                 specs: { processor: "Processor", storage: "RAM / Storage" },
                 currencyPrefix: "EGP",
                 viewButton: "View on Amazon EG",
+                compareTitle: "Price comparison",
+                amazonPriceLabel: "Amazon EG",
+                noonPriceLabel: "Noon Price",
+                noonButton: "View on Noon",
+                saveLabel: "Save",
                 categories: {
                     gaming: { eyebrow: "Section 1", title: "Gaming Laptops (OMEN & Victus)", note: "High-performance machines with dedicated NVIDIA RTX graphics.", badge: "Gaming", detailLabel: "Graphics" },
                     business: { eyebrow: "Section 2", title: "Business & Premium AI PCs (ProBook & OmniBook)", note: "Laptops optimized for professional use, mobility, and AI features.", badge: "Business", detailLabel: "Notable specs" },
@@ -180,6 +193,11 @@
                 specs: { processor: "المعالج", storage: "الذاكرة / التخزين" },
                 currencyPrefix: "ج.م.",
                 viewButton: "عرض على أمازون مصر",
+                compareTitle: "مقارنة الأسعار",
+                amazonPriceLabel: "أمازون مصر",
+                noonPriceLabel: "سعر نون",
+                noonButton: "عرض على نون",
+                saveLabel: "توفير",
                 categories: {
                     gaming: { eyebrow: "القسم 1", title: "لابتوبات الألعاب (OMEN و Victus)", note: "أجهزة عالية الأداء مزودة ببطاقات NVIDIA RTX منفصلة.", badge: "الألعاب", detailLabel: "الرسوميات" },
                     business: { eyebrow: "القسم 2", title: "أجهزة الأعمال والذكاء الاصطناعي (ProBook و OmniBook)", note: "لابتوبات مهيأة للاستخدام المهني والحركة وميزات الذكاء الاصطناعي.", badge: "الأعمال", detailLabel: "المواصفات البارزة" },
@@ -210,7 +228,7 @@
                     { asin: "B0G711KB9M", model: "ProBook 460 G11", processor: "Ultra 7 155U", storage: "8GB / 512GB SSD", detail: "16-inch / FreeDOS", price: "44,999" },
                     { asin: "B0D5ZKHBXR", model: "OmniBook X 14", processor: "Snapdragon X Elite", storage: "16GB / 512GB SSD", detail: "2.2K Touch / AI NPU", price: "72,999" },
                     { asin: "B0F9LKZJS1", model: "ProBook 460 G11", processor: "Ultra 7 155U", storage: "32GB / 1TB SSD", detail: "16-inch / Win 11 Pro", price: "89,999" },
-                    { asin: "B0D4F8MZX1", model: "ProBook 460 G11", processor: "Ultra 7 155U", storage: "16GB / 512GB SSD", detail: "16-inch / Win 11", price: "78,666" },
+                    { asin: "B0D4F8MZX1", model: "ProBook 460 G11", processor: "Ultra 7 155U", storage: "16GB / 512GB SSD", detail: "16-inch / Win 11", price: "78,666", noonPrice: "78,500", noonUrl: "https://www.noon.com/egypt-en/elitebook-640-g11-intel-core-ultra-7-155u-16-gb-256gb-ssd-intel-integrated-graphics-14-0-wuxga-uwva-ips-led-1920-1200-300-nits-anti-glare-wi-fi-6e-bluetooth-5-3-silver-windows-11-pro-64-bit-us-english-natural-silver-natural-silver/N70244834V/p/?o=c1801d132ab1b9ca&shareId=eac33f65-f0e4-4c4a-a51c-cf150b8fabab&utm_campaign=CMP2ce0b63a6a1anoon&utm_medium=AFF3c05ebab2e4d&adjust_deeplink_js=1&utm_source=C1000264L" },
                     { asin: "B0FW124C4S", model: "OmniBook 5 Flip", processor: "i5-1334U", storage: "8GB / 512GB SSD", detail: "14-inch 2K Touch / 2-in-1", price: "37,777" },
                     { asin: "B0FVWGTYHJ", model: "OmniBook 3 AI", processor: "Ryzen AI 5 330", storage: "16GB / 512GB SSD", detail: "15.6-inch FHD / 300 nits", price: "36,600" }
                 ]
@@ -258,6 +276,17 @@
             return `https://www.amazon.eg/dp/${product.asin}/?tag=${affiliateTag}`;
         }
 
+        function parsePriceValue(value) {
+            const normalized = String(value || "").replace(/[^0-9.]/g, "");
+            const parsed = Number(normalized);
+            return Number.isFinite(parsed) ? parsed : null;
+        }
+
+        function formatPriceValue(value) {
+            const locale = currentLanguage === "ar" ? "ar-EG" : "en-US";
+            return new Intl.NumberFormat(locale).format(value);
+        }
+
         function setLanguageButtonsActive(language) {
             languageButtons.forEach((button) => {
                 const isActive = button.dataset.lang === language;
@@ -271,7 +300,28 @@
 
             catalogRoot.innerHTML = catalog.map((category) => {
                 const categoryCopy = dictionary.categories[category.id];
-                const cards = category.products.map((product) => `
+                const cards = category.products.map((product) => {
+                    const amazonValue = parsePriceValue(product.price);
+                    const noonValue = parsePriceValue(product.noonPrice);
+                    const hasNoonComparison = Boolean(product.noonUrl && noonValue !== null);
+                    const savingsValue = hasNoonComparison && amazonValue !== null && noonValue < amazonValue ? amazonValue - noonValue : 0;
+
+                    const compareMarkup = hasNoonComparison ? `
+                        <div class="price-compare">
+                            <p class="price-compare-title">${dictionary.compareTitle}</p>
+                            <div class="compare-row">
+                                <span>${dictionary.amazonPriceLabel}</span>
+                                <strong>${dictionary.currencyPrefix} ${product.price}</strong>
+                            </div>
+                            <div class="compare-row">
+                                <span>${dictionary.noonPriceLabel}</span>
+                                <strong>${dictionary.currencyPrefix} ${product.noonPrice}</strong>
+                            </div>
+                            ${savingsValue > 0 ? `<span class="compare-savings">${dictionary.saveLabel} ${dictionary.currencyPrefix} ${formatPriceValue(savingsValue)}</span>` : ""}
+                        </div>
+                    ` : `<div class="price">${dictionary.currencyPrefix} ${product.price}</div>`;
+
+                    return `
                     <article class="card">
                         <span class="badge">${categoryCopy.badge}</span>
                         <div>
@@ -282,14 +332,16 @@
                             <li><strong>${dictionary.specs.storage}:</strong> ${product.storage}</li>
                             <li><strong>${categoryCopy.detailLabel}:</strong> ${product.detail}</li>
                         </ul>
-                        <div class="price">${dictionary.currencyPrefix} ${product.price}</div>
+                        ${compareMarkup}
                         <div class="card-actions">
-                            <a class="button secondary" href="${buildAmazonUrl(product)}" target="_blank" rel="sponsored noopener noreferrer">
+                            <a class="button secondary amazon" href="${buildAmazonUrl(product)}" target="_blank" rel="sponsored noopener noreferrer">
                                 ${dictionary.viewButton}
                             </a>
+                            ${product.noonUrl ? `<a class="button secondary noon" href="${product.noonUrl}" target="_blank" rel="sponsored noopener noreferrer">${dictionary.noonButton}</a>` : ""}
                         </div>
                     </article>
-                `).join("");
+                `;
+                }).join("");
 
                 return `
                     <section class="category" id="${category.id}">

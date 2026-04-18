@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About PriceFlow</title>
+    <style>
+        :root {
+            --bg: #08111d;
+            --panel: rgba(13, 23, 38, 0.92);
+            --card: rgba(255, 255, 255, 0.05);
+            --text: #edf4ff;
+            --muted: #a4b4cb;
+            --accent: #ffbf4d;
+            --accent-alt: #6de0d3;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            color: var(--text);
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            text-align: start;
+            background:
+                radial-gradient(circle at top left, rgba(109, 224, 211, 0.16), transparent 30%),
+                radial-gradient(circle at top right, rgba(255, 191, 77, 0.16), transparent 28%),
+                linear-gradient(180deg, #08111d 0%, #0b1524 100%);
+        }
+
+        a {
+            color: inherit;
+        }
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(8, 17, 29, 0.82);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .brand h1 {
+            margin: 0;
+            font-size: 1.15rem;
+            letter-spacing: 0.03em;
+        }
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--muted);
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            gap: 6px;
+            padding: 4px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .lang-btn {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent), #ffdca2);
+            color: #1b1409;
+        }
+
+        main {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 32px 20px 56px;
+        }
+
+        .hero,
+        .panel {
+            padding: 28px;
+            border-radius: 24px;
+            background: linear-gradient(135deg, rgba(17, 31, 51, 0.96), rgba(10, 20, 34, 0.9));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+        }
+
+        .hero h2,
+        .panel h3 {
+            margin-top: 0;
+        }
+
+        .kicker {
+            margin: 0 0 12px;
+            color: var(--accent-alt);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.77rem;
+            font-weight: 700;
+        }
+
+        .hero p,
+        .panel p,
+        .panel li {
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .stack {
+            display: grid;
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        .highlight {
+            background: rgba(255, 191, 77, 0.1);
+            border: 1px solid rgba(255, 191, 77, 0.22);
+            color: #ffe2ae;
+        }
+
+        .actions {
+            margin-top: 20px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid transparent;
+            background: linear-gradient(135deg, var(--accent), #ffdca2);
+            color: #1b1409;
+        }
+
+        footer {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 20px 32px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 820px) {
+            .site-header {
+                position: static;
+            }
+
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .header-actions {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <h1>PriceFlow</h1>
+                <p id="site-tagline">Amazon EG laptop picks for shoppers in Egypt</p>
+            </div>
+            <div class="header-actions">
+                <nav>
+                    <a id="nav-home" href="index.html">Home</a>
+                    <a id="nav-gaming" href="index.html#gaming">Gaming</a>
+                    <a id="nav-business" href="index.html#business">Business</a>
+                    <a id="nav-everyday" href="index.html#everyday">Everyday</a>
+                    <a id="nav-about" href="about.html">About</a>
+                </nav>
+                <div class="lang-switch" role="group" aria-label="Language selector">
+                    <button class="lang-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+                    <button class="lang-btn" type="button" data-lang="ar" aria-pressed="false">AR</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <p class="kicker" id="about-kicker">About PriceFlow</p>
+            <h2 id="about-title">Built to help Egyptian shoppers compare laptops faster</h2>
+            <p id="about-description">
+                PriceFlow is a simple product comparison website that organizes laptop deals in Egypt into clear,
+                easy-to-scan sections. The current catalog starts with HP models across gaming, business, and everyday
+                use.
+            </p>
+        </section>
+
+        <div class="stack">
+            <section class="panel">
+                <h3 id="about-what-title">What is PriceFlow?</h3>
+                <p id="about-what-text">
+                    It is a lightweight catalog that surfaces laptop options with price, key specs, and a direct path
+                    to Amazon Egypt.
+                </p>
+            </section>
+
+            <section class="panel">
+                <h3 id="about-goal-title">Our Goal</h3>
+                <p id="about-goal-text">
+                    The goal is to present useful laptop picks in a clean format so visitors can move from comparison
+                    to purchase without unnecessary clutter.
+                </p>
+            </section>
+
+            <section class="panel highlight">
+                <h3 id="about-disclosure-title">Affiliate Disclosure</h3>
+                <p id="about-disclosure-text">
+                    PriceFlow participates in affiliate programs. This means we may earn a commission when users
+                    purchase products through our links at no extra cost to them.
+                </p>
+            </section>
+        </div>
+
+        <div class="actions">
+            <a class="button" id="about-back" href="index.html">Back to the catalog</a>
+        </div>
+    </main>
+
+    <footer>
+        <p id="about-footer">PriceFlow may earn commissions from affiliate links.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                pageTitle: "About PriceFlow",
+                tagline: "Amazon EG laptop picks for shoppers in Egypt",
+                nav: {
+                    home: "Home",
+                    gaming: "Gaming",
+                    business: "Business",
+                    everyday: "Everyday",
+                    about: "About"
+                },
+                hero: {
+                    kicker: "About PriceFlow",
+                    title: "Built to help Egyptian shoppers compare laptops faster",
+                    description: "PriceFlow is a simple product comparison website that organizes laptop deals in Egypt into clear, easy-to-scan sections. The current catalog starts with HP models across gaming, business, and everyday use."
+                },
+                panels: {
+                    whatTitle: "What is PriceFlow?",
+                    whatText: "It is a lightweight catalog that surfaces laptop options with price, key specs, and a direct path to Amazon Egypt.",
+                    goalTitle: "Our Goal",
+                    goalText: "The goal is to present useful laptop picks in a clean format so visitors can move from comparison to purchase without unnecessary clutter.",
+                    disclosureTitle: "Affiliate Disclosure",
+                    disclosureText: "PriceFlow participates in affiliate programs. This means we may earn a commission when users purchase products through our links at no extra cost to them."
+                },
+                button: "Back to the catalog",
+                footer: "PriceFlow may earn commissions from affiliate links."
+            },
+            ar: {
+                pageTitle: "PriceFlow - من نحن",
+                tagline: "اختيارات لابتوبات HP لمتسوقي أمازون مصر",
+                nav: {
+                    home: "الرئيسية",
+                    gaming: "الألعاب",
+                    business: "الأعمال",
+                    everyday: "الاستخدام اليومي",
+                    about: "من نحن"
+                },
+                hero: {
+                    kicker: "من نحن",
+                    title: "تم تصميمه لمساعدة المتسوقين في مصر على مقارنة اللابتوبات بسرعة",
+                    description: "PriceFlow موقع بسيط لمقارنة المنتجات ينظم عروض اللابتوبات في مصر إلى أقسام واضحة وسهلة التصفح. يبدأ الكتالوج الحالي بموديلات HP في الألعاب والأعمال والاستخدام اليومي."
+                },
+                panels: {
+                    whatTitle: "ما هو PriceFlow؟",
+                    whatText: "هو كتالوج خفيف يعرض خيارات اللابتوبات مع السعر والمواصفات الأساسية ومسار مباشر إلى أمازون مصر.",
+                    goalTitle: "هدفنا",
+                    goalText: "الهدف هو تقديم اختيارات مفيدة بشكل مرتب حتى ينتقل الزائر من المقارنة إلى الشراء بدون ازدحام غير ضروري.",
+                    disclosureTitle: "إفصاح الأفيليت",
+                    disclosureText: "يشارك PriceFlow في برامج الأفيليت، وهذا يعني أننا قد نحصل على عمولة عندما يشتري المستخدمون المنتجات عبر روابطنا دون أي تكلفة إضافية عليهم."
+                },
+                button: "العودة إلى الكتالوج",
+                footer: "قد تربح PriceFlow عمولات من روابط الأفيليت."
+            }
+        };
+
+        const languageButtons = Array.from(document.querySelectorAll(".lang-btn"));
+        const uiElements = {
+            siteTagline: document.getElementById("site-tagline"),
+            navHome: document.getElementById("nav-home"),
+            navGaming: document.getElementById("nav-gaming"),
+            navBusiness: document.getElementById("nav-business"),
+            navEveryday: document.getElementById("nav-everyday"),
+            navAbout: document.getElementById("nav-about"),
+            kicker: document.getElementById("about-kicker"),
+            title: document.getElementById("about-title"),
+            description: document.getElementById("about-description"),
+            whatTitle: document.getElementById("about-what-title"),
+            whatText: document.getElementById("about-what-text"),
+            goalTitle: document.getElementById("about-goal-title"),
+            goalText: document.getElementById("about-goal-text"),
+            disclosureTitle: document.getElementById("about-disclosure-title"),
+            disclosureText: document.getElementById("about-disclosure-text"),
+            button: document.getElementById("about-back"),
+            footer: document.getElementById("about-footer")
+        };
+
+        let currentLanguage = "en";
+
+        function setLanguageButtonsActive(language) {
+            languageButtons.forEach((button) => {
+                const isActive = button.dataset.lang === language;
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+        }
+
+        function applyLanguage(language) {
+            const nextLanguage = translations[language] ? language : "en";
+            const dictionary = translations[nextLanguage];
+
+            currentLanguage = nextLanguage;
+            document.documentElement.lang = nextLanguage;
+            document.documentElement.dir = nextLanguage === "ar" ? "rtl" : "ltr";
+            document.title = dictionary.pageTitle;
+
+            uiElements.siteTagline.textContent = dictionary.tagline;
+            uiElements.navHome.textContent = dictionary.nav.home;
+            uiElements.navGaming.textContent = dictionary.nav.gaming;
+            uiElements.navBusiness.textContent = dictionary.nav.business;
+            uiElements.navEveryday.textContent = dictionary.nav.everyday;
+            uiElements.navAbout.textContent = dictionary.nav.about;
+            uiElements.kicker.textContent = dictionary.hero.kicker;
+            uiElements.title.textContent = dictionary.hero.title;
+            uiElements.description.textContent = dictionary.hero.description;
+            uiElements.whatTitle.textContent = dictionary.panels.whatTitle;
+            uiElements.whatText.textContent = dictionary.panels.whatText;
+            uiElements.goalTitle.textContent = dictionary.panels.goalTitle;
+            uiElements.goalText.textContent = dictionary.panels.goalText;
+            uiElements.disclosureTitle.textContent = dictionary.panels.disclosureTitle;
+            uiElements.disclosureText.textContent = dictionary.panels.disclosureText;
+            uiElements.button.textContent = dictionary.button;
+            uiElements.footer.textContent = dictionary.footer;
+
+            setLanguageButtonsActive(nextLanguage);
+
+            try {
+                localStorage.setItem("priceflow-language", nextLanguage);
+            } catch (error) {
+                void error;
+            }
+        }
+
+        languageButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applyLanguage(button.dataset.lang);
+            });
+        });
+
+        const savedLanguage = (() => {
+            try {
+                return localStorage.getItem("priceflow-language");
+            } catch (error) {
+                return null;
+            }
+        })();
+
+        const preferredLanguage = savedLanguage === "ar" || savedLanguage === "en"
+            ? savedLanguage
+            : (navigator.language && navigator.language.toLowerCase().startsWith("ar") ? "ar" : "en");
+
+        applyLanguage(preferredLanguage);
+    </script>
+</body>
+
+</html>

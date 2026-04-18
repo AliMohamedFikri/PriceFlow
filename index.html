@@ -1,89 +1,929 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PriceFlow - Compare Prices Easily</title>
-
+    <title>PriceFlow - HP Laptop Picks</title>
     <style>
+        :root {
+            --bg: #08111d;
+            --bg-soft: #0d1726;
+            --panel: rgba(13, 23, 38, 0.92);
+            --card: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --text: #edf4ff;
+            --muted: #a4b4cb;
+            --accent: #ffbf4d;
+            --accent-soft: rgba(255, 191, 77, 0.16);
+            --accent-alt: #6de0d3;
+            --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: Arial;
-            background: #f5f5f5;
             margin: 0;
+            color: var(--text);
+            font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+            text-align: start;
+            background:
+                radial-gradient(circle at top left, rgba(109, 224, 211, 0.16), transparent 30%),
+                radial-gradient(circle at top right, rgba(255, 191, 77, 0.16), transparent 28%),
+                linear-gradient(180deg, #08111d 0%, #0b1524 100%);
         }
-        header {
-            background: #111;
-            color: white;
-            padding: 15px;
-            text-align: center;
+
+        a {
+            color: inherit;
         }
-        .container {
-            padding: 20px;
+
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(8, 17, 29, 0.82);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
         }
-        .product {
-            background: white;
-            padding: 15px;
-            margin-bottom: 15px;
-            border-radius: 10px;
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 16px 20px;
             display: flex;
-            gap: 15px;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 16px;
         }
-        .product img {
-            width: 120px;
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
         }
-        .product-info {
-            flex: 1;
+
+        .brand h1 {
+            margin: 0;
+            font-size: 1.15rem;
+            letter-spacing: 0.03em;
         }
-        .btn {
-            background: #ff9900;
-            padding: 10px;
-            color: black;
+
+        .brand p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        nav a {
             text-decoration: none;
-            border-radius: 5px;
-            display: inline-block;
-            margin-top: 10px;
+            color: var(--muted);
+            font-weight: 600;
         }
+
+        nav a:hover {
+            color: var(--text);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+
+        .lang-switch {
+            display: inline-flex;
+            gap: 6px;
+            padding: 4px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .lang-btn {
+            border: 0;
+            background: transparent;
+            color: var(--muted);
+            font: inherit;
+            font-weight: 700;
+            padding: 8px 12px;
+            border-radius: 999px;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            background: linear-gradient(135deg, var(--accent), #ffdca2);
+            color: #1b1409;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 32px 20px 56px;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 24px;
+            padding: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 28px;
+            background: linear-gradient(135deg, rgba(17, 31, 51, 0.96), rgba(10, 20, 34, 0.9));
+            box-shadow: var(--shadow);
+        }
+
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            color: var(--accent-alt);
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            font-size: 0.77rem;
+            font-weight: 700;
+        }
+
+        .hero h2 {
+            margin: 0;
+            font-size: clamp(2.2rem, 4vw, 4rem);
+            line-height: 1.02;
+            max-width: 11ch;
+        }
+
+        .hero p {
+            max-width: 60ch;
+            margin: 16px 0 0;
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 26px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 18px;
+            border-radius: 999px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 1px solid transparent;
+        }
+
+        .button.primary {
+            background: linear-gradient(135deg, var(--accent), #ffdca2);
+            color: #1b1409;
+            box-shadow: 0 14px 32px rgba(255, 191, 77, 0.24);
+        }
+
+        .button.secondary {
+            border-color: rgba(255, 255, 255, 0.12);
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .hero-panel {
+            display: grid;
+            gap: 12px;
+            align-content: start;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .stat {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat strong {
+            display: block;
+            font-size: 1.6rem;
+        }
+
+        .stat span {
+            display: block;
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .hero-note {
+            padding: 18px;
+            border-radius: 20px;
+            background: rgba(255, 191, 77, 0.1);
+            border: 1px solid rgba(255, 191, 77, 0.22);
+            color: #ffe2ae;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-top: 34px;
+        }
+
+        .section-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .section-head h3 {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+
+        .section-head p {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .category {
+            margin-top: 18px;
+            padding: 22px;
+            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .category-head {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
+        }
+
+        .eyebrow {
+            margin: 0 0 4px;
+            color: var(--accent-alt);
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .category-title {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .category-note {
+            margin: 0;
+            color: var(--muted);
+            max-width: 60ch;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 14px;
+        }
+
+        .card {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            min-height: 100%;
+            padding: 18px;
+            border-radius: 20px;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.03));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .badge {
+            align-self: flex-start;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(109, 224, 211, 0.14);
+            color: #8ff3e8;
+            font-size: 0.76rem;
+            font-weight: 700;
+            letter-spacing: 0.04em;
+        }
+
+        .card h4 {
+            margin: 0;
+            font-size: 1.05rem;
+            line-height: 1.35;
+        }
+
+        .spec-list {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 8px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        .spec-list strong {
+            color: var(--text);
+        }
+
+        .price {
+            margin-top: auto;
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .card-actions .button {
+            width: 100%;
+        }
+
+        .disclosure {
+            margin-top: 24px;
+            padding: 18px 20px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--muted);
+            line-height: 1.7;
+        }
+
         footer {
-            text-align: center;
-            padding: 15px;
-            font-size: 14px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 32px;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 820px) {
+            .site-header {
+                position: static;
+            }
+
+            .header-inner {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .header-actions {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 24px;
+            }
+
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
-
-<header>
-    <h1>PriceFlow</h1>
-    <p>Compare prices from Amazon & Noon</p>
-</header>
-
-<div class="container">
-
-    <div class="product">
-        <img src="https://via.placeholder.com/120" alt="Product">
-        <div class="product-info">
-            <h3>Wireless Headphones</h3>
-            <p>High quality sound with noise cancellation.</p>
-
-            <p><strong>Amazon:</strong> $50</p>
-            <a class="btn" href="YOUR_AMAZON_AFFILIATE_LINK" target="_blank">
-                View on Amazon
-            </a>
-
-            <p><strong>Noon:</strong> $48</p>
-            <a class="btn" href="#">
-                View on Noon
-            </a>
+    <header class="site-header">
+        <div class="header-inner">
+            <div class="brand">
+                <h1>PriceFlow</h1>
+                <p id="site-tagline">Amazon EG laptop picks for shoppers in Egypt</p>
+            </div>
+            <div class="header-actions">
+                <nav>
+                    <a id="nav-home" href="index.html">Home</a>
+                    <a id="nav-gaming" href="#gaming">Gaming</a>
+                    <a id="nav-business" href="#business">Business</a>
+                    <a id="nav-everyday" href="#everyday">Everyday</a>
+                    <a id="nav-about" href="about.html">About</a>
+                </nav>
+                <div class="lang-switch" role="group" aria-label="Language selector">
+                    <button class="lang-btn active" type="button" data-lang="en" aria-pressed="true">EN</button>
+                    <button class="lang-btn" type="button" data-lang="ar" aria-pressed="false">AR</button>
+                </div>
+            </div>
         </div>
-    </div>
+    </header>
 
-</div>
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div>
+                <div class="kicker" id="hero-kicker">Affiliate-ready HP laptop catalog</div>
+                <h2 id="hero-title">HP laptops organized for Amazon Egypt shoppers</h2>
+                <p id="hero-description">
+                    Start with a focused HP lineup that covers gaming, business, and everyday use. Each card is set up
+                    for easy affiliate linking, clear pricing, and fast browsing on mobile or desktop.
+                </p>
+                <div class="hero-actions">
+                    <a class="button primary" id="hero-browse" href="#catalog">Browse the catalog</a>
+                    <a class="button secondary" id="hero-disclosure" href="about.html">Read the disclosure</a>
+                </div>
+            </div>
 
-<footer>
-    <p>
-        Disclosure: As an Amazon Associate, we earn from qualifying purchases.
-    </p>
-</footer>
+            <div class="hero-panel">
+                <div class="stat-grid" aria-label="Catalog highlights">
+                    <div class="stat">
+                        <strong id="stat-models-value">19</strong>
+                        <span id="stat-models-label">HP models</span>
+                    </div>
+                    <div class="stat">
+                        <strong id="stat-groups-value">3</strong>
+                        <span id="stat-groups-label">product groups</span>
+                    </div>
+                    <div class="stat">
+                        <strong id="stat-currency-value">EGP</strong>
+                        <span id="stat-currency-label">local pricing</span>
+                    </div>
+                </div>
+                <div class="hero-note" id="hero-note">
+                    Prices and availability can change on Amazon Egypt. Replace the sample links with your Amazon
+                    affiliate URLs when you are ready to publish.
+                </div>
+            </div>
+        </section>
 
+        <section class="section" id="catalog">
+            <div class="section-head">
+                <div>
+                    <h3 id="catalog-title">HP Laptop Catalog</h3>
+                    <p id="catalog-subtitle">All models are grouped by use case so visitors can scan them quickly.</p>
+                </div>
+            </div>
+
+            <div id="catalog-root"></div>
+        </section>
+
+        <section class="disclosure" id="disclosure">
+            <strong id="disclosure-label">Affiliate disclosure:</strong>
+            <span id="disclosure-text">PriceFlow may earn commissions from qualifying Amazon Egypt purchases made
+                through the links on this site. Product names and prices were added from the data you provided and
+                should be verified before publishing.</span>
+        </section>
+    </main>
+
+    <footer>
+        <p id="footer-text">PriceFlow is a simple product comparison site focused on laptop deals in Egypt.</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                pageTitle: "PriceFlow - HP Laptop Picks",
+                tagline: "Amazon EG laptop picks for shoppers in Egypt",
+                nav: {
+                    home: "Home",
+                    gaming: "Gaming",
+                    business: "Business",
+                    everyday: "Everyday",
+                    about: "About"
+                },
+                hero: {
+                    kicker: "Affiliate-ready HP laptop catalog",
+                    title: "HP laptops organized for Amazon Egypt shoppers",
+                    description: "Start with a focused HP lineup that covers gaming, business, and everyday use. Each card is set up for easy affiliate linking, clear pricing, and fast browsing on mobile or desktop.",
+                    browse: "Browse the catalog",
+                    disclosure: "Read the disclosure"
+                },
+                stats: {
+                    modelsValue: "19",
+                    modelsLabel: "HP models",
+                    groupsValue: "3",
+                    groupsLabel: "product groups",
+                    currencyValue: "EGP",
+                    currencyLabel: "local pricing"
+                },
+                heroNote: "Prices and availability can change on Amazon Egypt. Replace the sample links with your Amazon affiliate URLs when you are ready to publish.",
+                catalog: {
+                    title: "HP Laptop Catalog",
+                    subtitle: "All models are grouped by use case so visitors can scan them quickly."
+                },
+                disclosure: {
+                    label: "Affiliate disclosure:",
+                    text: "PriceFlow may earn commissions from qualifying Amazon Egypt purchases made through the links on this site. Product names and prices were added from the data you provided and should be verified before publishing."
+                },
+                footer: "PriceFlow is a simple product comparison site focused on laptop deals in Egypt.",
+                specs: {
+                    processor: "Processor",
+                    storage: "RAM / Storage"
+                },
+                currencyPrefix: "EGP",
+                viewButton: "View on Amazon EG",
+                categories: {
+                    gaming: {
+                        eyebrow: "Section 1",
+                        title: "Gaming Laptops (OMEN & Victus)",
+                        note: "High-performance machines with dedicated NVIDIA RTX graphics.",
+                        badge: "Gaming",
+                        detailLabel: "Graphics"
+                    },
+                    business: {
+                        eyebrow: "Section 2",
+                        title: "Business & Premium AI PCs (ProBook & OmniBook)",
+                        note: "Laptops optimized for professional use, mobility, and AI features.",
+                        badge: "Business",
+                        detailLabel: "Notable specs"
+                    },
+                    everyday: {
+                        eyebrow: "Section 3",
+                        title: "Home & Everyday Laptops",
+                        note: "General-purpose laptops for students or office work.",
+                        badge: "Everyday",
+                        detailLabel: "Notes"
+                    }
+                }
+            },
+            ar: {
+                pageTitle: "PriceFlow - لابتوبات HP",
+                tagline: "اختيارات لابتوبات HP لمتسوقي أمازون مصر",
+                nav: {
+                    home: "الرئيسية",
+                    gaming: "الألعاب",
+                    business: "الأعمال",
+                    everyday: "الاستخدام اليومي",
+                    about: "من نحن"
+                },
+                hero: {
+                    kicker: "كتالوج HP جاهز للأفيليت",
+                    title: "لابتوبات HP مرتبة لمتسوقي أمازون مصر",
+                    description: "ابدأ بتشكيلة مركزة من لابتوبات HP تشمل الألعاب والأعمال والاستخدام اليومي. كل بطاقة جاهزة لربط الأفيليت بسهولة مع عرض واضح للأسعار وتصفح سريع على الهاتف أو الكمبيوتر.",
+                    browse: "تصفح الكتالوج",
+                    disclosure: "اقرأ الإفصاح"
+                },
+                stats: {
+                    modelsValue: "19",
+                    modelsLabel: "موديلات HP",
+                    groupsValue: "3",
+                    groupsLabel: "تصنيفات",
+                    currencyValue: "ج.م.",
+                    currencyLabel: "الأسعار المحلية"
+                },
+                heroNote: "قد تتغير الأسعار والتوفر على أمازون مصر. استبدل الروابط التجريبية بروابط الأفيليت الخاصة بك قبل النشر.",
+                catalog: {
+                    title: "كتالوج لابتوبات HP",
+                    subtitle: "تم تجميع جميع الموديلات حسب الاستخدام حتى يسهل على الزائر تصفحها بسرعة."
+                },
+                disclosure: {
+                    label: "إفصاح الأفيليت:",
+                    text: "قد تربح PriceFlow عمولة من عمليات الشراء المؤهلة من أمازون مصر عبر الروابط الموجودة في الموقع. تمت إضافة أسماء المنتجات والأسعار من البيانات التي قدمتها، ويجب التحقق منها قبل النشر."
+                },
+                footer: "PriceFlow موقع بسيط لمقارنة لابتوبات مصر.",
+                specs: {
+                    processor: "المعالج",
+                    storage: "الذاكرة / التخزين"
+                },
+                currencyPrefix: "ج.م.",
+                viewButton: "عرض على أمازون مصر",
+                categories: {
+                    gaming: {
+                        eyebrow: "القسم 1",
+                        title: "لابتوبات الألعاب (OMEN و Victus)",
+                        note: "أجهزة عالية الأداء مزودة ببطاقات NVIDIA RTX منفصلة.",
+                        badge: "الألعاب",
+                        detailLabel: "الرسوميات"
+                    },
+                    business: {
+                        eyebrow: "القسم 2",
+                        title: "أجهزة الأعمال والذكاء الاصطناعي (ProBook و OmniBook)",
+                        note: "لابتوبات مهيأة للاستخدام المهني والحركة وميزات الذكاء الاصطناعي.",
+                        badge: "الأعمال",
+                        detailLabel: "المواصفات البارزة"
+                    },
+                    everyday: {
+                        eyebrow: "القسم 3",
+                        title: "لابتوبات المنزل والاستخدام اليومي",
+                        note: "أجهزة عامة للطلاب أو للعمل المكتبي.",
+                        badge: "اليومي",
+                        detailLabel: "ملاحظات"
+                    }
+                }
+            }
+        };
+
+        const catalog = [
+            {
+                id: "gaming",
+                products: [
+                    {
+                        model: "OMEN MAX 16-ah0016ne",
+                        processor: "Ultra 7-255HX",
+                        storage: "32GB / 1TB SSD",
+                        detail: "RTX 5070 Ti (12GB)",
+                        price: "129,999"
+                    },
+                    {
+                        model: "OMEN MAX 16-ak0007ne",
+                        processor: "Ryzen AI 7 350",
+                        storage: "16GB / 512GB SSD",
+                        detail: "RTX 5060 (8GB)",
+                        price: "86,999"
+                    },
+                    {
+                        model: "OMEN 16-am0025ne",
+                        processor: "Ultra 7-255H",
+                        storage: "16GB / 1TB SSD",
+                        detail: "RTX Graphics",
+                        price: "79,499"
+                    },
+                    {
+                        model: "Victus 15-fb3014ne",
+                        processor: "Ryzen 7-7445HS",
+                        storage: "16GB / 512GB SSD",
+                        detail: "RTX 2050 (4GB)",
+                        price: "49,999"
+                    },
+                    {
+                        model: "Victus 15-fa1039ne",
+                        processor: "i7-13700H",
+                        storage: "8GB / 512GB SSD",
+                        detail: "RTX 3050 (6GB)",
+                        price: "47,299"
+                    },
+                    {
+                        model: "Victus 15-fb0034ne",
+                        processor: "Ryzen 7-5800H",
+                        storage: "16GB / 512GB SSD",
+                        detail: "RTX 3050 (4GB)",
+                        price: "44,999"
+                    }
+                ]
+            },
+            {
+                id: "business",
+                products: [
+                    {
+                        model: "ProBook G11",
+                        processor: "Ultra 7 155H",
+                        storage: "32GB / 1TB SSD",
+                        detail: "RTX 2050 / Win 11 Pro",
+                        price: "97,777"
+                    },
+                    {
+                        model: "ProBook 460 G11",
+                        processor: "Ultra 7 155U",
+                        storage: "32GB / 1TB SSD",
+                        detail: "16-inch FHD+ / Win 11 Pro",
+                        price: "89,999"
+                    },
+                    {
+                        model: "ProBook 460 G11",
+                        processor: "Ultra 5 125U",
+                        storage: "32GB / 256GB SSD",
+                        detail: "16-inch WUXGA / Win 11 Pro",
+                        price: "88,888"
+                    },
+                    {
+                        model: "ProBook 460 G11",
+                        processor: "Ultra 7 155U",
+                        storage: "16GB / 512GB SSD",
+                        detail: "16-inch WUXGA / vPro",
+                        price: "78,666"
+                    },
+                    {
+                        model: "OmniBook X 14",
+                        processor: "Snapdragon X Elite",
+                        storage: "16GB / 512GB SSD",
+                        detail: "2.2K Touch / AI NPU",
+                        price: "72,999"
+                    },
+                    {
+                        model: "ProBook 460",
+                        processor: "Ultra 5 125U",
+                        storage: "8GB / 512GB SSD",
+                        detail: "16-inch / FreeDOS",
+                        price: "55,555"
+                    },
+                    {
+                        model: "ProBook 460",
+                        processor: "Ultra 7 155U",
+                        storage: "8GB / 512GB SSD",
+                        detail: "16-inch / FreeDOS",
+                        price: "44,999"
+                    },
+                    {
+                        model: "OmniBook 5 Flip",
+                        processor: "i5-1334U",
+                        storage: "8GB / 512GB SSD",
+                        detail: "14-inch 2K Touch / 2-in-1",
+                        price: "37,777"
+                    },
+                    {
+                        model: "OmniBook 3 AI",
+                        processor: "Ryzen AI 5 330",
+                        storage: "16GB / 512GB SSD",
+                        detail: "15.6-inch FHD / 300 nits",
+                        price: "36,600"
+                    }
+                ]
+            },
+            {
+                id: "everyday",
+                products: [
+                    {
+                        model: "HP Laptop AI 15",
+                        processor: "Ultra 7-255U",
+                        storage: "16GB / 1TB SSD",
+                        detail: "Includes BT Mouse",
+                        price: "43,999"
+                    },
+                    {
+                        model: "HP 15-dw3023ne",
+                        processor: "Not listed",
+                        storage: "Not listed",
+                        detail: "2GB Dedicated GPU",
+                        price: "29,999"
+                    },
+                    {
+                        model: "HP 15-DW1380NIA",
+                        processor: "i5-10210U",
+                        storage: "4GB / 1TB HDD",
+                        detail: "Black / Win 11 Home",
+                        price: "24,999"
+                    },
+                    {
+                        model: "HP 15s-EQ2014NE",
+                        processor: "Ryzen 5-5500U",
+                        storage: "4GB / 256GB SSD",
+                        detail: "Dos / Black",
+                        price: "23,999"
+                    }
+                ]
+            }
+        ];
+
+        const catalogRoot = document.getElementById("catalog-root");
+        const languageButtons = Array.from(document.querySelectorAll(".lang-btn"));
+        const uiElements = {
+            siteTagline: document.getElementById("site-tagline"),
+            navHome: document.getElementById("nav-home"),
+            navGaming: document.getElementById("nav-gaming"),
+            navBusiness: document.getElementById("nav-business"),
+            navEveryday: document.getElementById("nav-everyday"),
+            navAbout: document.getElementById("nav-about"),
+            heroKicker: document.getElementById("hero-kicker"),
+            heroTitle: document.getElementById("hero-title"),
+            heroDescription: document.getElementById("hero-description"),
+            heroBrowse: document.getElementById("hero-browse"),
+            heroDisclosure: document.getElementById("hero-disclosure"),
+            statModelsValue: document.getElementById("stat-models-value"),
+            statModelsLabel: document.getElementById("stat-models-label"),
+            statGroupsValue: document.getElementById("stat-groups-value"),
+            statGroupsLabel: document.getElementById("stat-groups-label"),
+            statCurrencyValue: document.getElementById("stat-currency-value"),
+            statCurrencyLabel: document.getElementById("stat-currency-label"),
+            heroNote: document.getElementById("hero-note"),
+            catalogTitle: document.getElementById("catalog-title"),
+            catalogSubtitle: document.getElementById("catalog-subtitle"),
+            disclosureLabel: document.getElementById("disclosure-label"),
+            disclosureText: document.getElementById("disclosure-text"),
+            footerText: document.getElementById("footer-text")
+        };
+
+        let currentLanguage = "en";
+
+        function buildAmazonUrl(product) {
+            const query = [product.model, product.processor, "HP laptop Egypt"]
+                .filter(Boolean)
+                .join(" ");
+            return `https://www.amazon.eg/s?k=${encodeURIComponent(query)}`;
+        }
+
+        function setLanguageButtonsActive(language) {
+            languageButtons.forEach((button) => {
+                const isActive = button.dataset.lang === language;
+                button.classList.toggle("active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+        }
+
+        function renderCatalog() {
+            const dictionary = translations[currentLanguage];
+
+            catalogRoot.innerHTML = catalog.map((category) => {
+                const categoryCopy = dictionary.categories[category.id];
+                const cards = category.products.map((product) => `
+                    <article class="card">
+                        <span class="badge">${categoryCopy.badge}</span>
+                        <div>
+                            <h4>${product.model}</h4>
+                        </div>
+                        <ul class="spec-list">
+                            <li><strong>${dictionary.specs.processor}:</strong> ${product.processor}</li>
+                            <li><strong>${dictionary.specs.storage}:</strong> ${product.storage}</li>
+                            <li><strong>${categoryCopy.detailLabel}:</strong> ${product.detail}</li>
+                        </ul>
+                        <div class="price">${dictionary.currencyPrefix} ${product.price}</div>
+                        <div class="card-actions">
+                            <a class="button secondary" href="${buildAmazonUrl(product)}" target="_blank" rel="sponsored noopener noreferrer">
+                                ${dictionary.viewButton}
+                            </a>
+                        </div>
+                    </article>
+                `).join("");
+
+                return `
+                    <section class="category" id="${category.id}">
+                        <div class="category-head">
+                            <div>
+                                <p class="eyebrow">${categoryCopy.eyebrow}</p>
+                                <h3 class="category-title">${categoryCopy.title}</h3>
+                            </div>
+                            <p class="category-note">${categoryCopy.note}</p>
+                        </div>
+                        <div class="card-grid">
+                            ${cards}
+                        </div>
+                    </section>
+                `;
+            }).join("");
+        }
+
+        function applyLanguage(language) {
+            const nextLanguage = translations[language] ? language : "en";
+            const dictionary = translations[nextLanguage];
+
+            currentLanguage = nextLanguage;
+            document.documentElement.lang = nextLanguage;
+            document.documentElement.dir = nextLanguage === "ar" ? "rtl" : "ltr";
+            document.title = dictionary.pageTitle;
+
+            uiElements.siteTagline.textContent = dictionary.tagline;
+            uiElements.navHome.textContent = dictionary.nav.home;
+            uiElements.navGaming.textContent = dictionary.nav.gaming;
+            uiElements.navBusiness.textContent = dictionary.nav.business;
+            uiElements.navEveryday.textContent = dictionary.nav.everyday;
+            uiElements.navAbout.textContent = dictionary.nav.about;
+            uiElements.heroKicker.textContent = dictionary.hero.kicker;
+            uiElements.heroTitle.textContent = dictionary.hero.title;
+            uiElements.heroDescription.textContent = dictionary.hero.description;
+            uiElements.heroBrowse.textContent = dictionary.hero.browse;
+            uiElements.heroDisclosure.textContent = dictionary.hero.disclosure;
+            uiElements.statModelsValue.textContent = dictionary.stats.modelsValue;
+            uiElements.statModelsLabel.textContent = dictionary.stats.modelsLabel;
+            uiElements.statGroupsValue.textContent = dictionary.stats.groupsValue;
+            uiElements.statGroupsLabel.textContent = dictionary.stats.groupsLabel;
+            uiElements.statCurrencyValue.textContent = dictionary.stats.currencyValue;
+            uiElements.statCurrencyLabel.textContent = dictionary.stats.currencyLabel;
+            uiElements.heroNote.textContent = dictionary.heroNote;
+            uiElements.catalogTitle.textContent = dictionary.catalog.title;
+            uiElements.catalogSubtitle.textContent = dictionary.catalog.subtitle;
+            uiElements.disclosureLabel.textContent = dictionary.disclosure.label;
+            uiElements.disclosureText.textContent = dictionary.disclosure.text;
+            uiElements.footerText.textContent = dictionary.footer;
+
+            renderCatalog();
+            setLanguageButtonsActive(nextLanguage);
+
+            try {
+                localStorage.setItem("priceflow-language", nextLanguage);
+            } catch (error) {
+                void error;
+            }
+        }
+
+        languageButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                applyLanguage(button.dataset.lang);
+            });
+        });
+
+        const savedLanguage = (() => {
+            try {
+                return localStorage.getItem("priceflow-language");
+            } catch (error) {
+                return null;
+            }
+        })();
+
+        const preferredLanguage = savedLanguage === "ar" || savedLanguage === "en"
+            ? savedLanguage
+            : (navigator.language && navigator.language.toLowerCase().startsWith("ar") ? "ar" : "en");
+
+        applyLanguage(preferredLanguage);
+    </script>
 </body>
+
 </html>
